@@ -21,10 +21,7 @@ function arrayInJsonFile(string $nameFile, array $data): bool
         return false;
     }
     $createFile = file_put_contents($nameFile, $strJson);
-    if ($createFile === false) {
-        return false;
-    }
-    return (bool) true;
+    return (bool)$createFile;
 }
 
 function arrayFromJsonFile(string $nameFile)
@@ -42,24 +39,33 @@ function arrayFromJsonFile(string $nameFile)
 
 function usersArrayCountRepeatNames(array $usersArray)
 {
-    try {
-        $usersArrayName = array_column($usersArray, 'name');
-        $repeatNamesUsers = array_count_values($usersArrayName);
-    } catch (Exception $e) {
+    if ($usersArray) {
+        if (!array_key_exists('name', $usersArray[0])) {
+            return false;
+        }
+    }
+    $usersArrayName = array_column($usersArray, 'name');
+    if (!$usersArrayName) {
         return false;
     }
-    return $repeatNamesUsers;
+    return array_count_values($usersArrayName);
 }
 
 function getMediumAgeUsersArray(array $usersArray)
 {
-    try {
-        $usersArrayAge = array_column($usersArray, 'age');
-        $sumAge = array_sum($usersArrayAge);
-        $countUsers = count($usersArrayAge);
-        $mediumAgeUsers = $sumAge / $countUsers;
-    } catch (Exception $e) {
+    if ($usersArray) {
+        if (!array_key_exists('age', $usersArray[0])) {
+            return false;
+        }
+    }
+    $usersArrayAge = array_column($usersArray, 'age');
+    if (!$usersArrayAge) {
         return false;
     }
-    return (int) $mediumAgeUsers;
+    $sumAge = array_sum($usersArrayAge);
+    $countUsers = count($usersArrayAge);
+    if ($countUsers === 0) {
+        return false;
+    }
+    return (int)($sumAge / $countUsers);
 }
