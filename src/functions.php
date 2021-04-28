@@ -31,7 +31,7 @@ function arrayFromJsonFile(string $nameFile)
         return false;
     }
     $data = json_decode($strJson, true);
-    if (empty($data)) {
+    if (!$data) {
         return false;
     }
     return $data;
