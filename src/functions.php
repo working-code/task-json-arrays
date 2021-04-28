@@ -39,10 +39,8 @@ function arrayFromJsonFile(string $nameFile)
 
 function usersArrayCountRepeatNames(array $usersArray)
 {
-    if ($usersArray) {
-        if (!array_key_exists('name', $usersArray[0])) {
-            return false;
-        }
+    if ($usersArray && !array_key_exists('name', $usersArray[0])) {
+        return false;
     }
     $usersArrayName = array_column($usersArray, 'name');
     if (!$usersArrayName) {
@@ -53,10 +51,8 @@ function usersArrayCountRepeatNames(array $usersArray)
 
 function getMediumAgeUsersArray(array $usersArray)
 {
-    if ($usersArray) {
-        if (!array_key_exists('age', $usersArray[0])) {
-            return false;
-        }
+    if ($usersArray && !array_key_exists('age', $usersArray[0])) {
+        return false;
     }
     $usersArrayAge = array_column($usersArray, 'age');
     if (!$usersArrayAge) {
