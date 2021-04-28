@@ -5,12 +5,11 @@ function usersCreateArray(int $countUsers = 50): array
     $usersArray = [];
     $nameUsers = ['Мария', 'Татьяна', 'Иван', 'Игорь', 'Андрей'];
     for ($i = 0; $i < $countUsers; $i++) {
-        $user = [
+        $usersArray[] = [
             'id' => $i,
             'name' => $nameUsers[array_rand($nameUsers)],
             'age' => mt_rand(18, 45)
         ];
-        $usersArray[] = $user;
     }
     return $usersArray;
 }
@@ -25,7 +24,7 @@ function arrayInJsonFile(string $nameFile, array $data): bool
     if ($createFile === false) {
         return false;
     }
-    return true;
+    return (bool) true;
 }
 
 function arrayFromJsonFile(string $nameFile)
